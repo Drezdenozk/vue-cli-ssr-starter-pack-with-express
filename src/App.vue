@@ -1,12 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    current layout: "{{layout}}"
+    <component :is="layout">
+      <router-view/>
+    </component>
   </div>
 </template>
+
+<script>
+const defaultLayout = 'default';
+
+export default {
+  computed: {
+    layout() {
+      return `${(this.$route.meta.layout || defaultLayout)}-layout`;
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
